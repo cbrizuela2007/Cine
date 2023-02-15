@@ -1,0 +1,21 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.mb{
+    margin-bottom: 25px;
+}
+
+.detalle{
+    display: flex;
+    height: 26px;
+    margin: 0 680px;
+    width: 50%;
+}
+
+.dato{
+    width: 100px;
+}
