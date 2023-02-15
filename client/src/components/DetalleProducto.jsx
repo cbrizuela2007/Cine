@@ -36,6 +36,7 @@ const DetalleProducto = () => {
         {
           recorrerObjeto()
         }
+        <button></button>
     </div>
   )
 }
