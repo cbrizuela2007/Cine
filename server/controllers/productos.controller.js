@@ -19,15 +19,15 @@ const crearProducto = (req,res) =>{
     console.log("Cuerpo", req.body)
     Productos.create(req.body)
     .then(resultado => {res.json(resultado)})
-    .catch(error=> res.json(error))
+    .catch(error=> res.status(400).json(error))
 }
 
 const actualizarProducto = (req,res) =>{
     const _id = req.params._id
     console.log(req.body)
-    Productos.updateOne({_id: _id}, req.body)
+    Productos.updateOne({_id: _id}, req.body,{runValidators:true})
     .then(resultado => res.json(resultado))
-    .catch(error=> res.json(error))
+    .catch(error=> res.status(400).json(error))
 }
 
 const eliminarProducto = (req,res) =>{

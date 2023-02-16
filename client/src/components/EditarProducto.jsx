@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ListaProducto from './ListaProducto'
@@ -20,6 +20,7 @@ const EditarProducto = () => {
 
     const [listaProductos, setlistaProductos] = useState([])
 
+    const [errores, setErrores] = useState({})
 
     useEffect(() => apiListarProductoPorID(), [])
 
@@ -42,12 +43,14 @@ const EditarProducto = () => {
 
         // const {title, price, description} = campos
         // console.log(campos.)
-        axios.put('http://localhost:8000/api/producto/update/'+id, campos)
+        axios.put('http://localhost:8000/api/producto/update/' + id, campos)
             .then(res => {
                 console.log(res)
                 navigate("/")
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setErrores(err.response.data.errors)
+            })
     }
 
     const apiListarProductos = () => {
@@ -64,13 +67,16 @@ const EditarProducto = () => {
                 <h1>Product Manager</h1>
                 <form onSubmit={handleSubmit} className="form">
                     <label htmlFor="">Title</label>
-                    <input type="text" name="title" value={campos.title}  onChange={handleChange} className="mb" />
+                    <input type="text" name="title" value={campos.title} onChange={handleChange} className="mb" />
+                    {errores.title ? <p className='error'>{errores.title.message}</p> : null}
 
                     <label htmlFor="">Price</label>
                     <input type="number" name='price' value={campos.price} onChange={handleChange} className="mb" />
+                    {errores.price ? <p className='error'>{errores.price.message}</p> : null}
 
                     <label htmlFor="">Description</label>
                     <input type="text" name='description' value={campos.description} onChange={handleChange} className="mb" />
+                    {errores.description ? <p className='error'>{errores.description.message}</p> : null}
 
                     <input type="submit" value="Actualizar" />
                 </form>
