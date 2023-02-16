@@ -1,9 +1,13 @@
+import {useEffect, useState} from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
 import ListaProducto from './ListaProducto'
-import './Producto.css'
 
-const Producto = () => {
+
+const EditarProducto = () => {
+
+    const { id } = useParams()
+    const navigate = useNavigate();
 
     /****** ESTADOS */
     const [campos, setCampos] = useState(
@@ -16,8 +20,16 @@ const Producto = () => {
 
     const [listaProductos, setlistaProductos] = useState([])
 
-    useEffect(() => apiListarProductos(), [])
 
+    useEffect(() => apiListarProductoPorID(), [])
+
+    const apiListarProductoPorID = () => {
+        axios.get('http://localhost:8000/api/producto/detalle/' + id)
+            .then(res => {
+                setCampos(res.data)
+            })
+            .catch(err => console.log(err))
+    }
 
     //****EVENTO Onchage
     const handleChange = (e) => {
@@ -30,15 +42,10 @@ const Producto = () => {
 
         // const {title, price, description} = campos
         // console.log(campos.)
-        axios.post('http://localhost:8000/api/producto/new', campos)
+        axios.put('http://localhost:8000/api/producto/update/'+id, campos)
             .then(res => {
                 console.log(res)
-                apiListarProductos()
-                setCampos({
-                    title: "",
-                    price: "",
-                    description: ""
-                })
+                navigate("/")
             })
             .catch(err => console.log(err))
     }
@@ -51,31 +58,25 @@ const Producto = () => {
             .catch(err => console.log(err))
     }
 
-    const removeFromDom = (id) => {
-        setlistaProductos(listaProductos.filter(producto => producto._id !== id));
-
-    }
-
     return (
         <>
             <div>
                 <h1>Product Manager</h1>
                 <form onSubmit={handleSubmit} className="form">
                     <label htmlFor="">Title</label>
-                    <input type="text" name="title" onChange={handleChange} value={campos.title}  className="mb" />
+                    <input type="text" name="title" value={campos.title}  onChange={handleChange} className="mb" />
 
                     <label htmlFor="">Price</label>
-                    <input type="number" name='price' onChange={handleChange} value={campos.price}  className="mb" />
+                    <input type="number" name='price' value={campos.price} onChange={handleChange} className="mb" />
 
                     <label htmlFor="">Description</label>
-                    <input type="text" name='description' onChange={handleChange}  value={campos.description} className="mb" />
+                    <input type="text" name='description' value={campos.description} onChange={handleChange} className="mb" />
 
-                    <input type="submit" value="Create" />
+                    <input type="submit" value="Actualizar" />
                 </form>
             </div>
-            <ListaProducto listaProductos={listaProductos} removeFromDom={removeFromDom}></ListaProducto>
         </>
     )
 }
 
-export default Producto
+export default EditarProducto
