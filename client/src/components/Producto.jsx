@@ -48,7 +48,7 @@ const Producto = () => {
     }
 
     const apiListarProductos = () => {
-        axios.get('http://localhost:8000/api/producto')
+        axios.get('http://localhost:8000/api/producto',{withCredentials:true})
             .then(res => {
                 setlistaProductos(res.data)
             })
