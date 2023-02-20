@@ -1,0 +1,73 @@
+.wrapper {
+    border-style: dashed;
+    border-color: rgb(102, 102, 208);
+    width: 90%;
+    margin: 15px auto;
+    height: 600px;
+}
+
+.Nav {
+
+    justify-content: space-between;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.titulo {
+    justify-content: space-between;
+    margin: 15px auto;
+    width: 90%;
+}
+
+.contenido {
+    width: 100%;
+    margin: 20px auto;
+    justify-content: center;
+    height: 100px;
+}
+
+.tamaño {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logout {
+    color: white;
+    font-weight: bolder;
+    border: solid black;
+}
+
+.celdas td:first-child {
+    width: 10px;
+}
+
+.celdas td:nth-child(2) {
+    width: 100px;
+}
+
+.celdas td:last-child {
+    width: 200px;
+} 
+
+.botones{
+    margin-top: 250px;
+    margin-left: 90px;
+    margin-right: 30px;
+}
+
+.recortar{
+    width: 30%;
+    margin: 0 auto;
+}
+
+.text{
+    text-align: center;
+}
+
+.error{
+    color: red;
+}

@@ -18,10 +18,8 @@ require("./config/mongoose.config")
 
 
 //enrutamiento
-const RutaProductos = require("./routes/productos.route")
-RutaProductos(app);
-const RutaUsuarios = require("./routes/user.route")
-RutaUsuarios(app);
+const RutaMovies = require("./routes/movie.routes")
+RutaMovies(app);
 
 
 //levantar servidor node
